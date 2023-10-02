@@ -11,10 +11,12 @@ const Greeting = ({ name, age, isLoggedIn }: IGreetingProps) => {
     <div className={classes.card}>
       <h3>Welcome!</h3>
       {isLoggedIn ? (
-        <div>
-          <p>name:{name}</p>
-          <p>age:{age}</p>
-        </div>
+        <>
+          <div>
+            <p>name:{name}</p>
+            <p>age:{age}</p>
+          </div>
+        </>
       ) : (
         <p>Unknown</p>
       )}
