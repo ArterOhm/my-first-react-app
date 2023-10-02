@@ -4,3 +4,6 @@
   align-items: center;
   gap: 20px;
 }
+.App div div p {
+  margin: 0;
+}

@@ -6,7 +6,9 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <Greeting />
+      <Greeting name="F" age={30} />
+      <Greeting name="A" age={25} />
+      <Greeting name="B" age={27} />
     </div>
   )
 }
