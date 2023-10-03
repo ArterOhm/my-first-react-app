@@ -42,6 +42,9 @@ function App() {
       body: newBody,
     })
     setPosts(currentPosts)
+
+    setnewTitle('')
+    setnewBody('')
   }
 
   const islogin = true
@@ -51,9 +54,9 @@ function App() {
       <Greeting name="F" age={30} isLoggedIn={islogin} />
       <form onSubmit={hendleSubmit}>
         <label>Title</label>
-        <input type="text" onChange={(e) => setnewTitle(e.target.value)} required />
+        <input type="text" value={newTitle} onChange={(e) => setnewTitle(e.target.value)} required />
         <label>Body</label>
-        <input type="text" onChange={(e) => setnewBody(e.target.value)} required />
+        <input type="text" value={newBody} onChange={(e) => setnewBody(e.target.value)} required />
 
         <button type="submit">Submit</button>
       </form>
