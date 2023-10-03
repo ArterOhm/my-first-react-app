@@ -1,5 +1,6 @@
 import { PostDTO } from '../Types/dto'
 import classes from './Post.module.css'
+import { useState } from 'react'
 
 interface IPostProps {
   post: PostDTO
@@ -8,15 +9,20 @@ interface IPostProps {
 
 const Post = ({ post, isLoggedIn }: IPostProps) => {
   const { id, userId, title, body } = post
-  const handlaClick = (id: number) => {
-    alert(`clicked ${id}`)
+  const [isShow, issetShow] = useState<boolean>(true)
+
+  const handleClick = () => {
+    issetShow(!isShow)
   }
+
   return isLoggedIn ? (
-    <div onClick={() => handlaClick(id)} className={classes.post}>
+    <div className={classes.post}>
       <p>id: {id}</p>
       <p>postedBy: {userId}</p>
       <p>title: {title}</p>
       <p>body: {body}</p>
+      {!isShow && <p>more post info...</p>}
+      <button onClick={handleClick}>{isShow ? 'Show More' : 'Show Less'}</button>
     </div>
   ) : (
     <></>
