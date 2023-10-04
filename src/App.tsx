@@ -1,56 +1,28 @@
 import './App.css'
-import Greeting from './components/Greeting'
-import Navbar from './components/Navbar'
-import { CreatePostDTO, PostDTO } from './Types/dto'
+
 import Post from './components/Post'
-import { FormEvent, useEffect, useState } from 'react'
-import axios from 'axios'
+import { FormEvent, useState } from 'react'
+
+import usePosts from './Hooks/usePosts'
+import Navbar from './components/Navbar'
+import Greeting from './components/Greeting'
 
 function App() {
-  const [posts, setPosts] = useState<PostDTO[] | null>(null)
+  const { posts, isLoading, isSubmitPost, createPost } = usePosts()
   const [newTitle, setnewTitle] = useState<string>('')
   const [newBody, setnewBody] = useState<string>('')
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [isSubmitPost, setIsSubmitPost] = useState<boolean>(false)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true)
-      try {
-        const res = await axios.get<PostDTO[]>('https://jsonplaceholder.typicode.com/posts')
-
-        setPosts(res.data)
-
-      } catch (err) {
-        console.error(err)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    fetchData()
-  }, [])
 
   const hendleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    const newPostsBody :CreatePostDTO = {
-      userId: Math.floor(Math.random()* 10000),
-      title: newTitle,
-      body: newBody,
-    }
-    setIsSubmitPost(!isSubmitPost)
+    
     try {
-      const res = await axios.post<PostDTO[]>('https://jsonplaceholder.typicode.com/posts',newPostsBody
-      )
-      
-      console.log(res.data)
-
+      await createPost(newTitle, newBody)
+      setnewTitle('')
+      setnewBody('')
     } catch (err) {
       console.error(err)
     }
-
-    setnewTitle('')
-    setnewBody('')
   }
 
   if (isLoading) return <h1>Loading...</h1>
