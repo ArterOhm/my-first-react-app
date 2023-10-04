@@ -1,7 +1,7 @@
 import './App.css'
 import Greeting from './components/Greeting'
 import Navbar from './components/Navbar'
-import { PostDTO } from './Types/dto'
+import { CreatePostDTO, PostDTO } from './Types/dto'
 import Post from './components/Post'
 import { FormEvent, useEffect, useState } from 'react'
 import axios from 'axios'
@@ -11,6 +11,7 @@ function App() {
   const [newTitle, setnewTitle] = useState<string>('')
   const [newBody, setnewBody] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isSubmitPost, setIsSubmitPost] = useState<boolean>(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,6 +20,7 @@ function App() {
         const res = await axios.get<PostDTO[]>('https://jsonplaceholder.typicode.com/posts')
 
         setPosts(res.data)
+
       } catch (err) {
         console.error(err)
       } finally {
@@ -29,17 +31,23 @@ function App() {
     fetchData()
   }, [])
 
-  const hendleSubmit = (e: FormEvent) => {
+  const hendleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    if (!posts) return
-    const currentPosts = [...posts]
-    currentPosts.push({
-      id: Math.floor(Math.random() * Math.random() * 10000),
-      userId: Math.floor(Math.random() * Math.random() * 10000),
+    const newPostsBody :CreatePostDTO = {
+      userId: Math.floor(Math.random()* 10000),
       title: newTitle,
       body: newBody,
-    })
-    setPosts(currentPosts)
+    }
+    setIsSubmitPost(!isSubmitPost)
+    try {
+      const res = await axios.post<PostDTO[]>('https://jsonplaceholder.typicode.com/posts',newPostsBody
+      )
+      
+      console.log(res.data)
+
+    } catch (err) {
+      console.error(err)
+    }
 
     setnewTitle('')
     setnewBody('')
@@ -58,7 +66,7 @@ function App() {
         <label>Body</label>
         <input type="text" value={newBody} onChange={(e) => setnewBody(e.target.value)} required />
 
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={isSubmitPost}>{isSubmitPost? 'Post...':'Post'}</button>
       </form>
 
       <div className="feed-container">
