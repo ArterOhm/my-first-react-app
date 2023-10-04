@@ -1,52 +1,28 @@
 import './App.css'
-import Greeting from './components/Greeting'
-import Navbar from './components/Navbar'
-import { PostDTO } from './Types/dto'
+
 import Post from './components/Post'
-import { FormEvent, useEffect, useState } from 'react'
+import { FormEvent, useState } from 'react'
+
+import usePosts from './Hooks/usePosts'
+import Navbar from './components/Navbar'
+import Greeting from './components/Greeting'
 
 function App() {
-  const [posts, setPosts] = useState<PostDTO[] | null>(null)
+  const { posts, isLoading, isSubmitPost, createPost } = usePosts()
   const [newTitle, setnewTitle] = useState<string>('')
   const [newBody, setnewBody] = useState<string>('')
-  const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true)
-      try {
-        const res = await fetch('https://jsonplaceholder.typicode.com/posts')
-        const data = await res.json()
 
-        if (!res.ok) {
-          throw new Error('error')
-        }
-
-        setPosts(data)
-      } catch (err) {
-        console.error(err)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    fetchData()
-  }, [])
-
-  const hendleSubmit = (e: FormEvent) => {
+  const hendleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    if (!posts) return
-    const currentPosts = [...posts]
-    currentPosts.push({
-      id: Math.floor(Math.random() * Math.random() * 10000),
-      userId: Math.floor(Math.random() * Math.random() * 10000),
-      title: newTitle,
-      body: newBody,
-    })
-    setPosts(currentPosts)
-
-    setnewTitle('')
-    setnewBody('')
+    
+    try {
+      await createPost(newTitle, newBody)
+      setnewTitle('')
+      setnewBody('')
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   if (isLoading) return <h1>Loading...</h1>
@@ -62,7 +38,7 @@ function App() {
         <label>Body</label>
         <input type="text" value={newBody} onChange={(e) => setnewBody(e.target.value)} required />
 
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={isSubmitPost}>{isSubmitPost? 'Post...':'Post'}</button>
       </form>
 
       <div className="feed-container">
