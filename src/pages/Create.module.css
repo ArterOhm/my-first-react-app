@@ -1,5 +1,5 @@
 .container {
-  width: 250px;
+  width: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,4 +15,26 @@
   padding: 10px 8px;
   border-radius: 6px;
   gap: 5px;
+}
+
+input {
+  background-color: #eee;
+  box-shadow: 0 0 10px 5px rgb(0 0 0 / 0.1);
+  padding: 8px 10px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 6px;
+  width: 400px;
+}
+
+.postForm button {
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
+  background-color: #000000;
+  margin: 15px 0 10px 0;
+  padding: 10px 75px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 6px;
 }

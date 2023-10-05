@@ -1,9 +1,11 @@
 import { FormEvent, useState } from 'react'
 import usePosts from '../Hooks/usePosts'
 import classes from './Create.module.css'
+import { useNavigate } from 'react-router'
 
 const Create = () => {
   const { isLoading, isSubmitPost, createPost } = usePosts() // for Hooks
+  const navigate = useNavigate()
   const [newTitle, setnewTitle] = useState<string>('')
   const [newBody, setnewBody] = useState<string>('')
 
@@ -14,6 +16,7 @@ const Create = () => {
       await createPost(newTitle, newBody)
       setnewTitle('')
       setnewBody('')
+      navigate('/')
     } catch (err) {
       console.error(err)
     }

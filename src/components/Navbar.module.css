@@ -21,15 +21,14 @@
 }
 
 .active {
-  color: grey;
+  color: rgb(7, 0, 93);
   font-weight: bold;
-  text-decoration: none;
+  text-decoration: underline red 3px;
 }
 .login {
   background-color: #eee;
   padding: 8px 10px;
   box-sizing: border-box;
-  border: none;
   border: none;
   border-radius: 6px;
 }

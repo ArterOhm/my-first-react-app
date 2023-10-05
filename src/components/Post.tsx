@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { PostDTO } from '../Types/dto'
 import classes from './Post.module.css'
 import { useState } from 'react'
@@ -17,12 +18,14 @@ const Post = ({ post, isLoggedIn }: IPostProps) => {
 
   return isLoggedIn ? (
     <div className={classes.post}>
-      <p>id: {id}</p>
-      <p>postedBy: {userId}</p>
-      <p>title: {title}</p>
-      <p>body: {body}</p>
-      {!isShow && <p>more post info...</p>}
-      <button onClick={handleClick}>{isShow ? 'Show More' : 'Show Less'}</button>
+      <Link to={`/post/${id}`} style={{ textDecoration: 'none', color: 'black' }}>
+        <p>id: {id}</p>
+        <p>postedBy: {userId}</p>
+        <p>title: {title}</p>
+        <p>body: {body}</p>
+        {!isShow && <p>more post info...</p>}
+        <button onClick={handleClick}>{isShow ? 'Show More' : 'Show Less'}</button>
+      </Link>
     </div>
   ) : (
     <></>
