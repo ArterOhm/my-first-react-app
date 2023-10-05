@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import classes from './Greeting.module.css'
 
 interface IGreetingProps {
@@ -8,15 +7,10 @@ interface IGreetingProps {
 }
 
 const Greeting = ({ name, age, isLoggedIn }: IGreetingProps) => {
-  const [GreetingMsg, setGreetingMsg] = useState<string>('Welcome!')
-
-  const handleClick = () => {
-    setGreetingMsg('Hello!')
-  }
   return (
     <>
       <div className={classes.card}>
-        <h3>{GreetingMsg}</h3>
+        <h3>{'Welcome!'}</h3>
         {isLoggedIn ? (
           <>
             <div>
@@ -28,7 +22,6 @@ const Greeting = ({ name, age, isLoggedIn }: IGreetingProps) => {
           <p>Unknown</p>
         )}
       </div>
-      <button onClick={handleClick}>Chang Message</button>
     </>
   )
 }

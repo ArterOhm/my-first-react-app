@@ -40,7 +40,7 @@ const usePosts = () => {
     } catch (err) {
       throw new Error('Cannot create post')
     } finally {
-        setIsSubmitPost(false)
+      setIsSubmitPost(false)
     }
   }
 

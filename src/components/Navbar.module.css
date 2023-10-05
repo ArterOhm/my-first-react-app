@@ -10,3 +10,29 @@
   align-items: center;
   box-shadow: 0 0 10px 5px rgb(0 0 0 /0.1);
 }
+.menu {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.inactive {
+  text-decoration: none;
+}
+
+.active {
+  color: rgb(7, 0, 93);
+  font-weight: bold;
+  text-decoration: underline red 3px;
+}
+.login {
+  background-color: #eee;
+  padding: 8px 10px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 6px;
+}
+.login:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
