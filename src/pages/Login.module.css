@@ -1,0 +1,10 @@
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: auto;
+  background-color: rgb(126, 126, 126);
+  padding: 20px 16px;
+  border-radius: 10px;
+  gap: 15px;
+}

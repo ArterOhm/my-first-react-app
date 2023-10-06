@@ -8,7 +8,7 @@ const PostDetail = () => {
     <div className={classes.feedContainer}>
       <div className={classes.PostDetail}>
         <h1>{PostID?.title}</h1>
-        <p>userId : {PostID?.userId}</p>
+        <p>postedBy : {PostID?.userId}</p>
         <p>{PostID?.body}</p>
       </div>
     </div>
