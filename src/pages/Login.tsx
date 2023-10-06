@@ -1,22 +1,22 @@
 import { FormEvent, useState } from 'react'
 import classes from './Login.module.css'
 import { useAuth } from '../provifers/AuthProvider'
+import { useNavigate } from 'react-router'
 
 const Login = () => {
   const { login } = useAuth()
+  const navigate = useNavigate()
   const [username, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
 
     try {
       await login(username, password)
+      navigate('/')
     } catch (err) {
       console.log(err)
     }
-    setUsername('')
-    setPassword('')
   }
   return (
     <form className={classes.loginForm} onSubmit={handleSubmit}>

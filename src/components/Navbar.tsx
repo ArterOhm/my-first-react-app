@@ -3,9 +3,8 @@ import classes from './Navbar.module.css'
 import { useAuth } from '../provifers/AuthProvider'
 
 const Navbar = () => {
-  const { isLoggedIn } = useAuth()
+  const { isLoggedIn, logout } = useAuth()
 
-  console.log('from Navbar:', isLoggedIn)
   return (
     <nav className={classes.navbar}>
       <div className={classes.menu}>
@@ -15,15 +14,23 @@ const Navbar = () => {
         </NavLink>
       </div>
       <div className={classes.menu}>
-        <NavLink className={({ isActive }) => (isActive ? classes.active : classes.inactive)} to="/profile">
-          Profile
-        </NavLink>
-        <NavLink className={({ isActive }) => (isActive ? classes.active : classes.inactive)} to="/create">
-          Create
-        </NavLink>
-        <NavLink className={classes.login} to="/Login">
-          Login
-        </NavLink>
+        {isLoggedIn ? (
+          <>
+            <NavLink className={({ isActive }) => (isActive ? classes.active : classes.inactive)} to="/profile">
+              Profile
+            </NavLink>
+            <NavLink className={({ isActive }) => (isActive ? classes.active : classes.inactive)} to="/create">
+              Create
+            </NavLink>
+            <NavLink className={classes.login} onClick={logout} to="/">
+              Logout
+            </NavLink>
+          </>
+        ) : (
+          <NavLink className={classes.login} to="/Login">
+            Login
+          </NavLink>
+        )}
       </div>
     </nav>
   )

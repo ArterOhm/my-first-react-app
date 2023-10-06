@@ -7,8 +7,8 @@ const Home = () => {
   const { isLoggedIn } = useAuth()
   console.log('from home:', isLoggedIn)
   const { posts, isLoading } = usePosts() // for Hooks
+  console.log(isLoggedIn)
   if (isLoading) return <h1>Loading...</h1>
-
   const islogin = true
   return (
     <div className={classes.container}>
