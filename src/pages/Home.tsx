@@ -1,10 +1,13 @@
 import usePosts from '../Hooks/usePosts'
 import Post from '../components/Post'
+import { useAuth } from '../provifers/AuthProvider'
 import classes from './Home.module.css'
 
 const Home = () => {
+  const { isLoggedIn } = useAuth()
+  console.log('from home:', isLoggedIn)
   const { posts, isLoading } = usePosts() // for Hooks
-
+  console.log(isLoggedIn)
   if (isLoading) return <h1>Loading...</h1>
   const islogin = true
   return (

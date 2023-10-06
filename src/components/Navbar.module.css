@@ -27,6 +27,8 @@
 }
 .login {
   background-color: #eee;
+  color: black;
+  text-decoration: none;
   padding: 8px 10px;
   box-sizing: border-box;
   border: none;
